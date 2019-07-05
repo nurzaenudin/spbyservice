@@ -6,9 +6,12 @@
 package com.nurzaenudin.spbyservice.DAO;
 
 import com.nurzaenudin.spbyservice.entity.Spbysakti;
+
 import java.util.List;
+import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
@@ -19,4 +22,7 @@ public interface SpbysaktiDao extends PagingAndSortingRepository<Spbysakti,Strin
    
     @Query ("SELECT s FROM Spbysakti s WHERE s.nomorspby = ?1 AND akunpajak = ?2")
     List<Spbysakti> findByNomorspbyAndAkunpajak(String nomorspby, String akunpajak);
+    
+    Page <Spbysakti> findByAgendaId (String agendaId, Pageable pageable);
+    Optional <Spbysakti> findByIdAndAgendaId (String id, String agendaId);
 }

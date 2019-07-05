@@ -5,16 +5,22 @@
  */
 package com.nurzaenudin.spbyservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 
@@ -61,6 +67,13 @@ public class Spbysakti {
     private String nipppk;
     
     private String uraian;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "agenda_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    
+    private Agenda agenda;
 
     public String getId() {
         return id;
@@ -157,6 +170,16 @@ public class Spbysakti {
     public void setUraian(String uraian) {
         this.uraian = uraian;
     }
+
+    public Agenda getAgenda() {
+        return agenda;
+    }
+
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
+    }
+    
+    
 
     @Override
     public String toString() {
