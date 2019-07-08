@@ -178,13 +178,15 @@ public class Spbysakti {
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Spbysakti{" + "id=" + id + ", kodesatker=" + kodesatker + ", nomorspby=" + nomorspby + ", tglspby=" + tglspby + ", namasupplier=" + namasupplier + ", npwpsupplier=" + npwpsupplier + ", alamatsupplier=" + alamatsupplier + ", nilai=" + nilai + ", akunpajak=" + akunpajak + ", nilaipajak=" + nilaipajak + ", nipppk=" + nipppk + ", uraian=" + uraian + '}';
+        return "Spbysakti{" + "id=" + id + ", kodesatker=" + kodesatker + ", nomorspby=" + nomorspby + ", tglspby=" + tglspby + ", namasupplier=" + namasupplier + ", npwpsupplier=" + npwpsupplier + ", alamatsupplier=" + alamatsupplier + ", nilai=" + nilai + ", akunpajak=" + akunpajak + ", nilaipajak=" + nilaipajak + ", nipppk=" + nipppk + ", uraian=" + uraian + ", agenda=" + agenda + '}';
     }
+    
+    
+
+
     
     
     

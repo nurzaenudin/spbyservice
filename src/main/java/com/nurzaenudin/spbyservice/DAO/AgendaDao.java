@@ -7,11 +7,14 @@ package com.nurzaenudin.spbyservice.DAO;
 
 import com.nurzaenudin.spbyservice.entity.Agenda;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author nurzaenudin
  */
-public interface AgendaDao extends PagingAndSortingRepository<Agenda, String>{
+
+@Repository
+public interface AgendaDao extends PagingAndSortingRepository<Agenda, Long>{
     
 }

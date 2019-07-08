@@ -5,9 +5,11 @@
  */
 package com.nurzaenudin.spbyservice.controller;
 
-import com.nurzaenudin.spbyservice.DAO.SpbysaktiDao;
-import com.nurzaenudin.spbyservice.entity.Spbysakti;
+import com.nurzaenudin.spbyservice.DAO.AgendaDao;
+import com.nurzaenudin.spbyservice.entity.Agenda;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,17 +20,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 
 @Controller
-public class SpbysaktiController {
+public class AgendaController {
     @Autowired
-    private SpbysaktiDao spbysaktidao;
+    private AgendaDao agendaDao;
     
-    public void tambahSpbysakti(Spbysakti spbysakti) {
-        spbysaktidao.save(spbysakti);
+    @GetMapping(path = "/agendakomen")
+
+    
+    @ResponseBody
+    public String agendakomen() {
+        return "ini agenda komen";
     }
     
-    @GetMapping("/home")
+    
+    @GetMapping("/agendas")
     @ResponseBody
-    public String home(){
-        return "ini home";
+    public Page<Agenda> getAllAgendas(Pageable pageable) {
+        return agendaDao.findAll(pageable);
     }
 }

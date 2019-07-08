@@ -5,13 +5,12 @@
  */
 package com.nurzaenudin.spbyservice.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -22,21 +21,21 @@ import org.hibernate.annotations.GenericGenerator;
 public class Agenda {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(nullable = false, length = 36)
-    private String id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
     
     @NotNull @NotEmpty
     private String penerima;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
+
+    
 
     public String getPenerima() {
         return penerima;

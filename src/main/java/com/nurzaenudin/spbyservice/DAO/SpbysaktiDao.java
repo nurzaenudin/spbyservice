@@ -13,16 +13,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author nurzaenudin
  */
+
+@Repository
 public interface SpbysaktiDao extends PagingAndSortingRepository<Spbysakti,String>{
    
     @Query ("SELECT s FROM Spbysakti s WHERE s.nomorspby = ?1 AND akunpajak = ?2")
     List<Spbysakti> findByNomorspbyAndAkunpajak(String nomorspby, String akunpajak);
     
-    Page <Spbysakti> findByAgendaId (String agendaId, Pageable pageable);
-    Optional <Spbysakti> findByIdAndAgendaId (String id, String agendaId);
+    Page <Spbysakti> findByAgendaId (Long agendaId, Pageable pageable);
+    Optional <Spbysakti> findByIdAndAgendaId (String id, Long agendaId);
 }
