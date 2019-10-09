@@ -8,6 +8,8 @@ package com.nurzaenudin.spbyservice.controller;
 import com.nurzaenudin.spbyservice.DAO.SpbysaktiDao;
 import com.nurzaenudin.spbyservice.entity.Spbysakti;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,5 +32,11 @@ public class SpbysaktiController {
     @ResponseBody
     public String home(){
         return "ini home";
+    }
+    
+        @GetMapping("/spbysaktis")
+    @ResponseBody
+    public Page<Spbysakti> getAllSpbysaktis(Pageable pageable) {
+        return spbysaktidao.findAll(pageable);
     }
 }
