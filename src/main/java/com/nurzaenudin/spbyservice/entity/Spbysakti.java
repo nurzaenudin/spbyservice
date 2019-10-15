@@ -68,11 +68,10 @@ public class Spbysakti {
     
     private String uraian;
     
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "agenda_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    
     private Agenda agenda;
 
     public String getId() {
