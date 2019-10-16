@@ -6,6 +6,9 @@
 package com.nurzaenudin.spbyservice.DAO;
 
 import com.nurzaenudin.spbyservice.entity.Agenda;
+import com.nurzaenudin.spbyservice.entity.Spbysakti;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

@@ -26,6 +26,9 @@ public interface SpbysaktiDao extends PagingAndSortingRepository<Spbysakti,Strin
     @Query ("SELECT s FROM Spbysakti s WHERE s.nomorspby = ?1 AND akunpajak = ?2")
     List<Spbysakti> findByNomorspbyAndAkunpajak(String nomorspby, String akunpajak);
     
+        @Query ("SELECT s FROM Spbysakti s WHERE s.id = ?1")
+    List<Spbysakti> findByNomorspbyId (String nomorspby);
+    
     Page <Spbysakti> findByAgendaId (Long agendaId, Pageable pageable);
     Optional <Spbysakti> findByIdAndAgendaId (String id, Long agendaId);
 }

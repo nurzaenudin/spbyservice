@@ -5,10 +5,14 @@
  */
 package com.nurzaenudin.spbyservice.controller;
 
+import com.nurzaenudin.spbyservice.DAO.AgendaDao;
 import com.nurzaenudin.spbyservice.DAO.SpbysaktiDao;
+import com.nurzaenudin.spbyservice.entity.Agenda;
 import com.nurzaenudin.spbyservice.entity.Spbysakti;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,43 +32,76 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 
 @Controller
-@RequestMapping(path="/spby")
 public class SpbysaktiController {
     @Autowired
     private SpbysaktiDao spbysaktidao;
     
-    @GetMapping("/home")
+    @Autowired
+    private AgendaDao agendadao;
+    
+    @GetMapping("/spby/home")
     @ResponseBody
     public String home(){
         return "ini home";
     }
         
-    @PostMapping(path="/tambah")
+    @PostMapping(path="/spby/tambah")
     @ResponseBody
     public void tambahSpbysakti(@RequestBody @Valid Spbysakti spbysakti) {
         spbysaktidao.save(spbysakti);
     }
     
-    @GetMapping("/all")
+    @GetMapping("/spby/all")
     @ResponseBody
     public Page<Spbysakti> getAllSpbysaktis(Pageable pageable) {
+        System.out.println("Ini iBu budi ");
         return spbysaktidao.findAll(pageable);
     }
     
-    @PutMapping("/{id}")
+    @PutMapping("/spby/{id}")
     @ResponseBody
     public void updateSpbysakti(@RequestBody @Valid Spbysakti spbysakti, @PathVariable String id){
         Optional <Spbysakti> s = spbysaktidao.findById(id);
         if (!s.isPresent())
             return;
         spbysakti.setId(id);
-        spbysaktidao.save(spbysakti);   
+        Agenda agenda=spbysakti.getAgenda();
+        System.out.println("ini agenda" + agenda);
+        
+        if( agenda != null){
+            agenda= agendadao.findById(spbysakti.getAgenda().getId()).get();        
+        }
+        spbysakti.setAgenda(agenda);
+        System.out.println("ini agenda" + agenda);
+        spbysaktidao.save(spbysakti); 
+        System.out.println("berhasil simpan "+spbysakti);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/spby/{id}")
     @ResponseBody
     public String hapusSpbysakti (@PathVariable String id){
         spbysaktidao.deleteById(id);
         return "Hapus Berhasil";
     }
+    
+//    @PutMapping("/{id}")
+//    @ResponseBody
+//    public void updateSpbyAgenda(@RequestBody @Valid Spbysakti spbysakti, @PathVariable String id){
+//        Optional <Spbysakti> s = spbysaktidao.findById(id);
+//        if (!s.isPresent())
+//            return;
+//        spbysakti.setId(id);
+//        spbysaktidao.save(spbysakti);   
+//    }
+        
+
+    @GetMapping("spby/{id}")
+    @ResponseBody
+    public Optional getSpbysakti(@PathVariable String id){
+        System.out.println("ini adalah id " + id);        
+        return spbysaktidao.findById(id);
+ 
+    }
+    
+    
 }

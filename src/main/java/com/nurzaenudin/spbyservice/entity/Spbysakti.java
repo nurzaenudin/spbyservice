@@ -6,6 +6,8 @@
 package com.nurzaenudin.spbyservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +32,7 @@ import org.hibernate.annotations.OnDeleteAction;
  */
 
 @Entity
+@JsonSerialize
 public class Spbysakti {
     
     @Id
@@ -45,7 +48,7 @@ public class Spbysakti {
     private String nomorspby;
     
     @NotNull @Temporal(TemporalType.DATE)
-    Date tglspby;
+    private Date tglspby;
     
     @NotNull @NotEmpty
     private String namasupplier;
@@ -68,11 +71,13 @@ public class Spbysakti {
     
     private String uraian;
     
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "agenda_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true )
+    @JoinColumn(name = "agenda_id", nullable = true )
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    //@JsonIgnore
     private Agenda agenda;
+    
+    
 
     public String getId() {
         return id;
